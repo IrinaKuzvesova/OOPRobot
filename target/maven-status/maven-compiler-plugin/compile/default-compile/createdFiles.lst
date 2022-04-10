@@ -8,7 +8,6 @@ gui\GameVisualizer$1.class
 log\Logger.class
 gui\GameVisualizer$2.class
 log\LogChangeListener.class
-Main.class
 gui\GameWindow.class
 gui\RobotsProgram.class
 log\LogEntry.class
