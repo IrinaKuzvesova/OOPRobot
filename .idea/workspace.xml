@@ -7,10 +7,16 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/log/LogChangeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/log/LogChangeListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/log/LogWindowSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/log/LogWindowSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/log/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/log/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/JavaRobot-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/JavaRobot-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/LogWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/LogWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log/LogChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/LogChangeListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log/LogWindowSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/LogWindowSource.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/log/Logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/Logger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
