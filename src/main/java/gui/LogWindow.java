@@ -1,12 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.TextArea;
+import java.awt.*;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 
+import gui.serialize.Saver;
 import log.LogChangeListener;
 import log.LogEntry;
 import log.LogWindowSource;
@@ -14,6 +13,7 @@ import log.LogWindowSource;
 public class LogWindow extends JInternalFrame implements LogChangeListener {
     private LogWindowSource m_logSource;
     private TextArea m_logContent;
+    private String name = "log";
 
     public LogWindow(LogWindowSource logSource) {
         super("Протокол работы", true, true, true, true);
@@ -21,12 +21,12 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
         m_logSource.registerListener(this);
         m_logContent = new TextArea("");
         m_logContent.setSize(200, 500);
-        
+
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(m_logContent, BorderLayout.CENTER);
         getContentPane().add(panel);
-        pack();
         updateLogContent();
+        new WindowCreator(this, name).setSizes();
     }
 
     private void updateLogContent() {
@@ -37,7 +37,7 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
         m_logContent.setText(content.toString());
         m_logContent.invalidate();
     }
-    
+
     @Override
     public void onLogChanged()
     {
@@ -51,6 +51,9 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
 
     @Override
     public void dispose() {
+        Rectangle bounds = this.getBounds();
+        Saver size = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, this.isIcon, this.isSelected);
+        size.save(name);
         unregister();
         super.dispose();
     }

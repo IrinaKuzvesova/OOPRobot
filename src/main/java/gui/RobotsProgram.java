@@ -9,6 +9,7 @@ import javax.swing.*;
 public class RobotsProgram
 {
     public static void main(String[] args) {
+      System.out.println(System.getProperty("user.dir"));
       try {
         UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 //        UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");

@@ -14,21 +14,18 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
+import java.util.HashMap;
 
 import gui.dialogs.CloseDialog;
 import gui.dialogs.FrameDialog;
 import log.Logger;
 
-/**
- * Что требуется сделать:
- * 1. Метод создания меню перегружен функционалом и трудно читается. 
- * Следует разделить его на серию более простых методов (или вообще выделить отдельный класс).
- *
- */
 public class MainApplicationFrame extends JFrame
 {
     private final JDesktopPane desktopPane = new JDesktopPane();
-
+    private GameWindow gameWindow;
+    private LogWindow logWindow;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public MainApplicationFrame() {
@@ -39,15 +36,12 @@ public class MainApplicationFrame extends JFrame
 
         setContentPane(desktopPane);
 
-        LogWindow logWindow = createLogWindow();
+        logWindow = createLogWindow();
         addWindow(logWindow);
 
-        GameWindow gameWindow = new GameWindow();
+        gameWindow = new GameWindow();
         gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         gameWindow.addInternalFrameListener(new FrameDialog(this, gameWindow));
-        gameWindow.setLocation(220, 10);
-        gameWindow.setSize(1100,  600);
-        gameWindow.setResizable(false);
         addWindow(gameWindow);
 
         setJMenuBar(generateMenuBar());
@@ -55,16 +49,22 @@ public class MainApplicationFrame extends JFrame
     
     protected LogWindow createLogWindow() {
         LogWindow logWindow = new LogWindow(Logger.getDefaultLogSource());
-        logWindow.setLocation(10,10);
-        logWindow.setSize(300, 800);
-        logWindow.setResizable(true);
+        setMinimumSize(logWindow.getSize());
         logWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         logWindow.addInternalFrameListener(new FrameDialog(this, logWindow));
-        logWindow.pack();
         Logger.debug("Протокол работает");
         return logWindow;
     }
-    
+
+    public GameWindow getGameWindow() {
+        return gameWindow;
+    }
+
+    public  LogWindow getLogWindow() {
+        return logWindow;
+    }
+
+
     protected void addWindow(JInternalFrame frame) {
         desktopPane.add(frame);
         frame.setVisible(true);
@@ -86,7 +86,6 @@ public class MainApplicationFrame extends JFrame
                     this.invalidate();
                 }));
 
-
         JMenu testMenu = makeMenu("Тесты", KeyEvent.VK_T, "Тестовые команды");
         testMenu.add(makeMenuItem("Сообщение в лог",
                 (event) -> Logger.debug("Новая строка"))
@@ -107,26 +106,21 @@ public class MainApplicationFrame extends JFrame
         return menuBar;
     }
 
-    private JMenuItem makeMenuItem(String text, ActionListener listener)
-    {
+    private JMenuItem makeMenuItem(String text, ActionListener listener) {
         JMenuItem menuItem = new JMenuItem(text, KeyEvent.VK_S);
         menuItem.addActionListener(listener);
         return menuItem;
     }
 
-    private JMenu makeMenu(String name, int event, String description)
-    {
+    private JMenu makeMenu(String name, int event, String description) {
         JMenu menu = new JMenu(name);
         menu.setMnemonic(event);
-        menu.getAccessibleContext().setAccessibleDescription(
-                description);
+        menu.getAccessibleContext().setAccessibleDescription(description);
         return menu;
     }
     
-    private void setLookAndFeel(String className)
-    {
-        try
-        {
+    private void setLookAndFeel(String className) {
+        try {
             UIManager.setLookAndFeel(className);
             SwingUtilities.updateComponentTreeUI(this);
         }

@@ -1,5 +1,6 @@
 package gui.dialogs;
 
+import gui.MainApplicationFrame;
 import gui.dialogs.Dialog;
 import org.w3c.dom.events.Event;
 
@@ -13,9 +14,9 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class CloseDialog extends WindowAdapter{
-    private JFrame owner;
+    private MainApplicationFrame owner;
 
-    public CloseDialog(JFrame owner){
+    public CloseDialog(MainApplicationFrame  owner){
         this.owner = owner;
     }
 
@@ -31,6 +32,8 @@ public class CloseDialog extends WindowAdapter{
         Dialog dialog = new Dialog(owner);
         dialog.setVisible(true);
         if (dialog.is_closed()) {
+            owner.getLogWindow().dispose();
+            owner.getGameWindow().dispose();
             System.exit(0);
         }
     }
