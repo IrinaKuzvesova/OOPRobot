@@ -1,9 +1,10 @@
 package gui;
 
+import gui.dialogs.CloseDialog;
+
 import java.awt.Frame;
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 public class RobotsProgram
 {
@@ -18,6 +19,9 @@ public class RobotsProgram
       }
       SwingUtilities.invokeLater(() -> {
         MainApplicationFrame frame = new MainApplicationFrame();
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        CloseDialog closeDialog = new CloseDialog(frame);
+        frame.addWindowListener(closeDialog);
         frame.pack();
         frame.setVisible(true);
         frame.setExtendedState(Frame.MAXIMIZED_BOTH);
