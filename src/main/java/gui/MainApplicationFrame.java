@@ -16,6 +16,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import gui.dialogs.CloseDialog;
 import gui.dialogs.FrameDialog;
@@ -27,6 +29,10 @@ public class MainApplicationFrame extends JFrame
     private GameWindow gameWindow;
     private LogWindow logWindow;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private static final ResourceBundle rb = ResourceBundle.getBundle(
+            "mainApplicationFrame",
+            Locale.getDefault()
+    );
 
     public MainApplicationFrame() {
         int inset = 50;
@@ -52,7 +58,7 @@ public class MainApplicationFrame extends JFrame
         setMinimumSize(logWindow.getSize());
         logWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         logWindow.addInternalFrameListener(new FrameDialog(this, logWindow));
-        Logger.debug("Протокол работает");
+        Logger.debug(rb.getString("protocolWorks"));
         return logWindow;
     }
 
@@ -73,27 +79,30 @@ public class MainApplicationFrame extends JFrame
     private JMenuBar generateMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu lookAndFeelMenu = makeMenu("Режим отображения", KeyEvent.VK_V, "Управление режимом отображения приложения");
+        JMenu lookAndFeelMenu = makeMenu(rb.getString(
+                "displayMode"),
+                KeyEvent.VK_V, rb.getString("appDisplayModeControl")
+        );
 
-        lookAndFeelMenu.add(makeMenuItem("Системная схема",
+        lookAndFeelMenu.add(makeMenuItem(rb.getString("systemScheme"),
                 (event) -> {
                     setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     this.invalidate();
                 }));
-        lookAndFeelMenu.add(makeMenuItem("Универсальная схема",
+        lookAndFeelMenu.add(makeMenuItem(rb.getString("universalScheme"),
                 (event) -> {
                     setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
                     this.invalidate();
                 }));
 
-        JMenu testMenu = makeMenu("Тесты", KeyEvent.VK_T, "Тестовые команды");
-        testMenu.add(makeMenuItem("Сообщение в лог",
-                (event) -> Logger.debug("Новая строка"))
+        JMenu testMenu = makeMenu(rb.getString("tests"), KeyEvent.VK_T, rb.getString("testCommands"));
+        testMenu.add(makeMenuItem(rb.getString("logMessages"),
+                (event) -> Logger.debug(rb.getString("newLine")))
         );
 
-        JMenu exitMenu = makeMenu("Выход", KeyEvent.VK_V, "Выход из игры");
+        JMenu exitMenu = makeMenu(rb.getString("exit"), KeyEvent.VK_V, rb.getString("exitGame"));
 
-        exitMenu.add(makeMenuItem("Выход",
+        exitMenu.add(makeMenuItem(rb.getString("exit"),
                 (event) -> {
                     CloseDialog closeDialog = new CloseDialog(this);
                     closeDialog.onPushedCloseButton(event);

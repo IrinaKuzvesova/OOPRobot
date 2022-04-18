@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.*;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -14,9 +16,14 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
     private LogWindowSource m_logSource;
     private TextArea m_logContent;
     private String name = "log";
+    private static final ResourceBundle rb = ResourceBundle.getBundle(
+            "logWindow",
+            Locale.getDefault()
+    );
+
 
     public LogWindow(LogWindowSource logSource) {
-        super("Протокол работы", true, true, true, true);
+        super(rb.getString("title"), true, true, true, true);
         m_logSource = logSource;
         m_logSource.registerListener(this);
         m_logContent = new TextArea("");
