@@ -31,8 +31,8 @@ public class MainApplicationFrame extends JFrame
     public MainApplicationFrame() {
         int inset = 50;
         setBounds(inset, inset,
-            screenSize.width  - inset*2,
-            screenSize.height - inset*2);
+                screenSize.width  - inset*2,
+                screenSize.height - inset*2);
 
         setContentPane(desktopPane);
 
@@ -46,7 +46,7 @@ public class MainApplicationFrame extends JFrame
 
         setJMenuBar(generateMenuBar());
     }
-    
+
     protected LogWindow createLogWindow() {
         LogWindow logWindow = new LogWindow(Logger.getDefaultLogSource());
         setMinimumSize(logWindow.getSize());
@@ -118,14 +118,14 @@ public class MainApplicationFrame extends JFrame
         menu.getAccessibleContext().setAccessibleDescription(description);
         return menu;
     }
-    
+
     private void setLookAndFeel(String className) {
         try {
             UIManager.setLookAndFeel(className);
             SwingUtilities.updateComponentTreeUI(this);
         }
         catch (ClassNotFoundException | InstantiationException
-            | IllegalAccessException | UnsupportedLookAndFeelException e)
+                | IllegalAccessException | UnsupportedLookAndFeelException e)
         {
             // just ignore
         }
