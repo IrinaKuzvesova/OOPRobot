@@ -12,7 +12,8 @@ class Dialog extends JDialog {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "dialog",
-            Locale.getDefault()
+            //Locale.getDefault()
+            new Locale("en", "US")
     );
 
     public Dialog(JFrame owner) {

@@ -32,7 +32,8 @@ public class MainApplicationFrame extends JFrame
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "mainApplicationFrame",
-            Locale.getDefault()
+            //Locale.getDefault()
+            new Locale("en", "US")
     );
 
     public MainApplicationFrame() {
@@ -98,13 +99,16 @@ public class MainApplicationFrame extends JFrame
                 (event) -> Logger.debug(rb.getString("newLine"))));
 
         JMenu exitMenu = makeMenu(rb.getString("exit"), KeyEvent.VK_V, rb.getString("exitGame"));
-
         exitMenu.add(makeMenuItem(rb.getString("exit"),
                 (event) -> {
                     CloseDialog closeDialog = new CloseDialog(this);
                     closeDialog.onPushedCloseButton(event);
                 }
         ));
+
+        //JMenu localeMenu = makeMenu(rb.getString("locale"), KeyEvent.VK_V, rb.getString("exitGame"));
+
+
 
         menuBar.add(lookAndFeelMenu);
         menuBar.add(testMenu);

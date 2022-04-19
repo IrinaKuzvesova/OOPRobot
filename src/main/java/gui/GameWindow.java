@@ -17,7 +17,8 @@ public class GameWindow extends JInternalFrame
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "gameWindow",
-            Locale.getDefault()
+            //Locale.getDefault()
+            new Locale("en", "US")
     );
 
     public GameWindow()
