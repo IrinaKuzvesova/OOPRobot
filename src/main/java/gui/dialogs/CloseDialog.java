@@ -1,17 +1,11 @@
 package gui.dialogs;
 
 import gui.MainApplicationFrame;
-import gui.dialogs.Dialog;
-import org.w3c.dom.events.Event;
+import gui.WindowThread;
 
-import javax.swing.*;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class CloseDialog extends WindowAdapter{
     private MainApplicationFrame owner;
@@ -33,7 +27,10 @@ public class CloseDialog extends WindowAdapter{
         dialog.setVisible(true);
         if (dialog.is_closed()) {
             owner.getLogWindow().dispose();
-            owner.getGameWindow().dispose();
+            owner.getScoreWindow().dispose();
+            for (WindowThread windowThread: owner.getWindowThreads()) {
+                windowThread.interrupt();
+            }
             System.exit(0);
         }
     }

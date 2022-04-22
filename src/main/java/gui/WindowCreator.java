@@ -28,7 +28,7 @@ public class WindowCreator {
             owner.setIcon(windowParameters.icon);
         } catch (Exception e) {
             owner.setLocation(0, 0);
-            owner.setSize(1000, 800);
+            owner.setSize(500, 300);
         }
     }
 }

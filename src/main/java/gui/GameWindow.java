@@ -12,8 +12,9 @@ import java.util.ResourceBundle;
 
 public class GameWindow extends JInternalFrame
 {
-    private final String name = "game";
-    private final GameVisualizer m_visualizer;
+    private final String name;
+    private final GameVisualizer gameVisualizer;
+    private final int id;
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "gameWindow",
@@ -21,19 +22,25 @@ public class GameWindow extends JInternalFrame
             new Locale("en", "US")
     );
 
-    public GameWindow()
-    {
-        super(rb.getString("title"), true, true, true, true); m_visualizer = new GameVisualizer(this);
+    public GameWindow(int id) {
+        super(rb.getString("title"), true, true, true, true);
+        this.name = "game" + id;
+        this.id = id;
+        gameVisualizer = new GameVisualizer(this, id);
         JPanel panel = new JPanel(new BorderLayout());
-        panel.add(m_visualizer, BorderLayout.CENTER);
+        panel.add(gameVisualizer, BorderLayout.CENTER);
         getContentPane().add(panel);
+        // загружает сохранения
         new WindowCreator(this, name).setSizes();
+        setResizable(false);
         show();
     }
 
     @Override
     public void dispose() {
         Rectangle bounds = this.getBounds();
+        DataTransmitter.killRobot(id);
+        gameVisualizer.dispose();
         Saver size = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, this.isIcon, this.isSelected);
         size.save(name);
         super.dispose();

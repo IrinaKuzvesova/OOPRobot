@@ -4,8 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
+// TO DO: по нажатию кнопки понять, нужно ли загружать сохранение
+// при закрытии окна не загружать сохранение
 
-public class Dialog extends JDialog {
+
+
+
+public class UploadDialog extends JDialog {
     private boolean closed = false;
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
@@ -14,19 +19,20 @@ public class Dialog extends JDialog {
             new Locale("en", "US")
     );
 
-    public Dialog(JFrame owner) {
-        super(owner, rb.getString("title"), true);
-        JLabel label = new JLabel(rb.getString("confText"));label.setLocation(200, 200);
+    public UploadDialog(JFrame owner) {
+        // TO DO: добавить локализацию
+        super(owner, "Есть доступное сохранение", true);
+        JLabel label = new JLabel("Загрузить сохранение?");label.setLocation(200, 200);
         add(label);
 
         JButton yes = new JButton(rb.getString("yesButton"));
-        yes.addActionListener(event -> {
-            setVisible(false);
-            closed = true;
-        });
+//        yes.addActionListener(event -> {
+//            setVisible(false);
+//            closed = true;
+//        });
 
         JButton no = new JButton(rb.getString("noButton"));
-        no.addActionListener(event -> setVisible(false));
+//        no.addActionListener(event -> setVisible(false));
 
         JPanel panel = new JPanel();
         panel.add(yes);

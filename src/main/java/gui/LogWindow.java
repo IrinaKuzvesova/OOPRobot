@@ -24,11 +24,9 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
     );
 
     public LogWindow(LogWindowSource logSource) {
-
         super(rb.getString("title"), true, true, true, true); m_logSource = logSource;
         m_logSource.registerListener(this);
         m_logContent = new TextArea("");
-        m_logContent.setSize(200, 500);
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(m_logContent, BorderLayout.CENTER);
@@ -60,8 +58,8 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
     @Override
     public void dispose() {
         Rectangle bounds = this.getBounds();
-        Saver size = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, this.isIcon, this.isSelected);
-        size.save(name);
+        Saver saver = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, this.isIcon, this.isSelected);
+        saver.save(name);
         unregister();
         super.dispose();
     }

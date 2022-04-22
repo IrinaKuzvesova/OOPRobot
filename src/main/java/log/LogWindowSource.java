@@ -64,6 +64,8 @@ public class LogWindowSource {
             }
         }
     }
+
+
     private void addNewMessage(LogEntry message) {
         if (size() == m_iQueueLength){
             m_messages.poll();

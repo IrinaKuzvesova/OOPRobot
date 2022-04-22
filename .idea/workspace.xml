@@ -3,10 +3,32 @@
   <component name="ChangeListManager">
     <list default="true" id="7e5fc64b-34d0-45b1-83b7-3fb71834736d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.txt" beforeDir="false" afterPath="$PROJECT_DIR$/game.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/GameVisualizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GameVisualizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GameWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/LogWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/LogWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/MainApplicationFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/MainApplicationFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/WindowCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/WindowCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/dialogs/CloseDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/dialogs/CloseDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/dialogs/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/dialogs/Dialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/log/LogWindowSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/log/LogWindowSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/JavaRobot-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/JavaRobot-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/Food.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/Food.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/LogWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/LogWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/MainApplicationFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/MainApplicationFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/WindowCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/WindowCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/dialogs/CloseDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/dialogs/CloseDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/dialogs/Dialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/dialogs/Dialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/log/LogWindowSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log/LogWindowSource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

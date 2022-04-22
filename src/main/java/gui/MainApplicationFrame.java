@@ -4,18 +4,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,9 +16,11 @@ import log.Logger;
 public class MainApplicationFrame extends JFrame
 {
     private final JDesktopPane desktopPane = new JDesktopPane();
-    private GameWindow gameWindow;
-    private LogWindow logWindow;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private GameWindow[] gameWindows = new GameWindow[4];
+    private WindowThread[] windowThreads = new WindowThread[4];
+    private LogWindow logWindow;
+    private ScoreWindow scoreWindow;
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "mainApplicationFrame",
@@ -43,35 +35,54 @@ public class MainApplicationFrame extends JFrame
                 screenSize.height - inset*2);
 
         setContentPane(desktopPane);
-
+        scoreWindow = createScoreWindow();
         logWindow = createLogWindow();
+        addWindow(scoreWindow);
         addWindow(logWindow);
 
-        gameWindow = new GameWindow();
-        gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        gameWindow.addInternalFrameListener(new FrameDialog(this, gameWindow));
-        addWindow(gameWindow);
+        for (int i=0; i<gameWindows.length; i++) {
+            windowThreads[i] = new WindowThread(i, this);
+            windowThreads[i].start();
+            gameWindows[i] = windowThreads[i].getGameWindow();
+        }
 
         setJMenuBar(generateMenuBar());
     }
 
-    protected LogWindow createLogWindow() {
-        LogWindow logWindow = new LogWindow(Logger.getDefaultLogSource());
-        setMinimumSize(logWindow.getSize());
-        logWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        logWindow.addInternalFrameListener(new FrameDialog(this, logWindow));
-        Logger.debug(rb.getString("protocolWorks"));
-        return logWindow;
+    public GameWindow getGameWindow(int index) {
+        return gameWindows[index];
     }
 
-    public GameWindow getGameWindow() {
-        return gameWindow;
+    public WindowThread[] getWindowThreads() {
+        return windowThreads;
+    }
+
+    public GameWindow[] getGameWindows() {
+        return gameWindows;
     }
 
     public  LogWindow getLogWindow() {
         return logWindow;
     }
 
+    public ScoreWindow getScoreWindow() {
+        return scoreWindow;
+    }
+
+    private ScoreWindow createScoreWindow() {
+        scoreWindow = new ScoreWindow();
+        scoreWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        scoreWindow.addInternalFrameListener(new FrameDialog(this, scoreWindow));
+        return scoreWindow;
+    }
+
+    protected LogWindow createLogWindow() {
+        LogWindow logWindow = new LogWindow(Logger.getDefaultLogSource());
+        logWindow.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        logWindow.addInternalFrameListener(new FrameDialog(this, logWindow));
+        Logger.debug(rb.getString("protocolWorks"));
+        return logWindow;
+    }
 
     protected void addWindow(JInternalFrame frame) {
         desktopPane.add(frame);
@@ -85,11 +96,13 @@ public class MainApplicationFrame extends JFrame
                 "displayMode"),
                 KeyEvent.VK_V, rb.getString("appDisplayModeControl")
         );
-        lookAndFeelMenu.add(makeMenuItem(rb.getString("systemScheme"),        (event) -> {
+        lookAndFeelMenu.add(makeMenuItem(rb.getString("systemScheme"),
+                (event) -> {
                     setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     this.invalidate();
                 }));
-        lookAndFeelMenu.add(makeMenuItem(rb.getString("universalScheme"),       (event) -> {
+        lookAndFeelMenu.add(makeMenuItem(rb.getString("universalScheme"),
+                (event) -> {
                     setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
                     this.invalidate();
                 }));
@@ -105,10 +118,6 @@ public class MainApplicationFrame extends JFrame
                     closeDialog.onPushedCloseButton(event);
                 }
         ));
-
-        //JMenu localeMenu = makeMenu(rb.getString("locale"), KeyEvent.VK_V, rb.getString("exitGame"));
-
-
 
         menuBar.add(lookAndFeelMenu);
         menuBar.add(testMenu);
