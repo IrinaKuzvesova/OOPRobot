@@ -14,7 +14,7 @@ public class ScoreWindow extends JInternalFrame {
         panel.add(scorePanel, BorderLayout.CENTER);
         getContentPane().add(panel);
         // загружает сохранение
-        new WindowCreator(this, name).setSizes();
+        //new WindowCreator(this, name).setSizes();
         show();
     }
 
@@ -24,5 +24,10 @@ public class ScoreWindow extends JInternalFrame {
         Saver saver = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, this.isIcon, this.isSelected);
         saver.save(name);
         super.dispose();
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

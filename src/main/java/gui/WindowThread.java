@@ -16,7 +16,7 @@ public class WindowThread extends Thread{
 
     @Override
     public void run() {
-        gameWindow = new GameWindow(id);
+        gameWindow = new GameWindow(id, owner.isLoad);
         gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         gameWindow.addInternalFrameListener(new FrameDialog(owner, gameWindow));
         owner.addWindow(gameWindow);

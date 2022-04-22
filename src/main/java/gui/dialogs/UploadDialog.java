@@ -1,14 +1,13 @@
 package gui.dialogs;
 
+import gui.MainApplicationFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Locale;
 import java.util.ResourceBundle;
 // TO DO: по нажатию кнопки понять, нужно ли загружать сохранение
 // при закрытии окна не загружать сохранение
-
-
-
 
 public class UploadDialog extends JDialog {
     private boolean closed = false;
@@ -19,20 +18,23 @@ public class UploadDialog extends JDialog {
             new Locale("en", "US")
     );
 
-    public UploadDialog(JFrame owner) {
+    public UploadDialog(MainApplicationFrame owner) {
         // TO DO: добавить локализацию
         super(owner, "Есть доступное сохранение", true);
         JLabel label = new JLabel("Загрузить сохранение?");label.setLocation(200, 200);
         add(label);
 
         JButton yes = new JButton(rb.getString("yesButton"));
-//        yes.addActionListener(event -> {
-//            setVisible(false);
-//            closed = true;
-//        });
+        yes.addActionListener(event -> {
+            owner.isLoad = true;
+            setVisible(false);
+        });
 
         JButton no = new JButton(rb.getString("noButton"));
-//        no.addActionListener(event -> setVisible(false));
+        no.addActionListener(event -> {
+            owner.isLoad = false;
+            setVisible(false);
+        });
 
         JPanel panel = new JPanel();
         panel.add(yes);

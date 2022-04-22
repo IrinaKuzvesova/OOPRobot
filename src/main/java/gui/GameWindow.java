@@ -22,8 +22,8 @@ public class GameWindow extends JInternalFrame
             new Locale("en", "US")
     );
 
-    public GameWindow(int id) {
-        super(rb.getString("title"), true, true, true, true);
+    public GameWindow(int id, boolean isLoad) {
+        super(rb.getString("title")+id, true, true, true, true);
         this.name = "game" + id;
         this.id = id;
         gameVisualizer = new GameVisualizer(this, id);
@@ -31,7 +31,13 @@ public class GameWindow extends JInternalFrame
         panel.add(gameVisualizer, BorderLayout.CENTER);
         getContentPane().add(panel);
         // загружает сохранения
-        new WindowCreator(this, name).setSizes();
+        if(isLoad){
+            new WindowCreator(this, name).setSizes();
+        }
+        else{
+            this.setLocation(400, 10);
+            this.setSize(400, 400);
+        }
         setResizable(false);
         show();
     }

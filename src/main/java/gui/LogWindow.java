@@ -15,7 +15,7 @@ import log.LogWindowSource;
 public class LogWindow extends JInternalFrame implements LogChangeListener {
     private LogWindowSource m_logSource;
     private TextArea m_logContent;
-    private String name = "log";
+    public String name = "log";
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "logWindow",
@@ -32,7 +32,7 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
         panel.add(m_logContent, BorderLayout.CENTER);
         getContentPane().add(panel);
         updateLogContent();
-        new WindowCreator(this, name).setSizes();
+        //new WindowCreator(this, name).setSizes();
     }
 
     private void updateLogContent() {

@@ -10,7 +10,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import gui.dialogs.CloseDialog;
+import gui.dialogs.Dialog;
 import gui.dialogs.FrameDialog;
+import gui.dialogs.UploadDialog;
 import log.Logger;
 
 public class MainApplicationFrame extends JFrame
@@ -21,6 +23,7 @@ public class MainApplicationFrame extends JFrame
     private WindowThread[] windowThreads = new WindowThread[4];
     private LogWindow logWindow;
     private ScoreWindow scoreWindow;
+    public boolean isLoad;
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "mainApplicationFrame",
@@ -29,6 +32,10 @@ public class MainApplicationFrame extends JFrame
     );
 
     public MainApplicationFrame() {
+
+        UploadDialog dialog = new UploadDialog(this);
+        dialog.setVisible(true);
+
         int inset = 50;
         setBounds(inset, inset,
                 screenSize.width  - inset*2,
@@ -37,6 +44,17 @@ public class MainApplicationFrame extends JFrame
         setContentPane(desktopPane);
         scoreWindow = createScoreWindow();
         logWindow = createLogWindow();
+        if(isLoad){
+            new WindowCreator(logWindow, logWindow.name).setSizes();
+            new WindowCreator(scoreWindow, scoreWindow.getName()).setSizes();
+        }
+        else{
+            logWindow.setLocation(0, 0);
+            logWindow.setSize(200, 300);
+
+            scoreWindow.setLocation(0, 301);
+            scoreWindow.setSize(200, 300);
+        }
         addWindow(scoreWindow);
         addWindow(logWindow);
 
