@@ -3,18 +3,28 @@
   <component name="ChangeListManager">
     <list default="true" id="7e5fc64b-34d0-45b1-83b7-3fb71834736d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Score.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Score.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/game0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/game1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/game2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/game3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/logWindow.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/logWindow.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/logWindow_en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/logWindow_en_US.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/logWindow_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/logWindow_ru_RU.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/mainApplicationFrame.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/mainApplicationFrame.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/mainApplicationFrame_en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/mainApplicationFrame_en_US.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/mainApplicationFrame_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/resources/mainApplicationFrame_ru_RU.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/LogWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/LogWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/MainApplicationFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/MainApplicationFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/ScoreWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/ScoreWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/WindowThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/WindowThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/dialogs/UploadDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/dialogs/UploadDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameVisualizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameVisualizer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/LogWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/LogWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GameWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GameWindow.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/MainApplicationFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/MainApplicationFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logWindow.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logWindow.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logWindow_en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logWindow_en_US.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logWindow_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logWindow_ru_RU.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainApplicationFrame.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainApplicationFrame.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainApplicationFrame_en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainApplicationFrame_en_US.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mainApplicationFrame_ru_RU.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mainApplicationFrame_ru_RU.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

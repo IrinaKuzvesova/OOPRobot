@@ -23,6 +23,7 @@ public class GameWindow extends JInternalFrame
     );
 
     public GameWindow(int id, boolean isLoad) {
+        //String.valueOf(id)
         super(rb.getString("title")+id, true, true, true, true);
         this.name = "game" + id;
         this.id = id;

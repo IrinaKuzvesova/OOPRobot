@@ -24,11 +24,12 @@ public class MainApplicationFrame extends JFrame
     private LogWindow logWindow;
     private ScoreWindow scoreWindow;
     public boolean isLoad;
+    private Locale mainLocale = Locale.getDefault();
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle(
-            "mainApplicationFrame",
+    private final ResourceBundle rb = ResourceBundle.getBundle(
+            "mainApplicationFrame", mainLocale
             //Locale.getDefault()
-            new Locale("en", "US")
+            //new Locale("en", "US")
     );
 
     public MainApplicationFrame() {
@@ -126,6 +127,8 @@ public class MainApplicationFrame extends JFrame
                 }));
 
         JMenu testMenu = makeMenu(rb.getString("tests"), KeyEvent.VK_T, rb.getString("testCommands"));
+
+        // поменять локаль?
         testMenu.add(makeMenuItem(rb.getString("logMessages"),
                 (event) -> Logger.debug(rb.getString("newLine"))));
 
@@ -137,10 +140,40 @@ public class MainApplicationFrame extends JFrame
                 }
         ));
 
+        JMenu localeMenu = makeMenu(rb.getString(
+                "locale"),
+                KeyEvent.VK_V, rb.getString("switchLocale")
+        );
+        localeMenu.add(makeMenuItem(rb.getString("ru_locale"),
+                (event) -> {
+                    switchLocale("ru");
+                    this.invalidate();
+                }));
+        localeMenu.add(makeMenuItem(rb.getString("en_locate"),
+                (event) -> {
+                    switchLocale("en");
+                    this.invalidate();
+                }));
+
+        menuBar.add(localeMenu);
         menuBar.add(lookAndFeelMenu);
         menuBar.add(testMenu);
         menuBar.add(exitMenu);
         return menuBar;
+    }
+
+    private void switchLocale(String loc){
+        if (loc.equals("en"))
+            mainLocale = new Locale("en", "US");
+        else mainLocale = Locale.getDefault();
+        updateLocale(mainLocale);
+    }
+
+    private void updateLocale(Locale loc){
+        //logWindow.setTitle("test");
+        logWindow.setLocale(loc);
+        scoreWindow.setLocale(loc);
+
     }
 
     private JMenuItem makeMenuItem(String text, ActionListener listener) {

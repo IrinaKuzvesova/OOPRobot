@@ -11,16 +11,17 @@ import gui.serialize.Saver;
 import log.LogChangeListener;
 import log.LogEntry;
 import log.LogWindowSource;
+import log.Logger;
 
 public class LogWindow extends JInternalFrame implements LogChangeListener {
     private LogWindowSource m_logSource;
     private TextArea m_logContent;
     public String name = "log";
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle(
+    private static ResourceBundle rb = ResourceBundle.getBundle(
             "logWindow",
-            //Locale.getDefault()
-            new Locale("en", "US")
+            Locale.getDefault()
+            //new Locale("en", "US")
     );
 
     public LogWindow(LogWindowSource logSource) {
@@ -32,7 +33,6 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
         panel.add(m_logContent, BorderLayout.CENTER);
         getContentPane().add(panel);
         updateLogContent();
-        //new WindowCreator(this, name).setSizes();
     }
 
     private void updateLogContent() {
@@ -62,5 +62,11 @@ public class LogWindow extends JInternalFrame implements LogChangeListener {
         saver.save(name);
         unregister();
         super.dispose();
+    }
+
+    public void setLocale(Locale locale){
+        rb = ResourceBundle.getBundle("logWindow", locale);
+        this.setTitle(rb.getString("title"));
+        Logger.debug(rb.getString("protocolWorks"));
     }
 }
