@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -25,15 +26,14 @@ public class MainApplicationFrame extends JFrame
     private ScoreWindow scoreWindow;
     public boolean isLoad;
     private Locale mainLocale = Locale.getDefault();
+    private HashMap<String, JMenu> allMenu = new HashMap<>();
+    private HashMap<String, JMenuItem> allMenuItem = new HashMap<>();
 
-    private final ResourceBundle rb = ResourceBundle.getBundle(
+    private ResourceBundle rb = ResourceBundle.getBundle(
             "mainApplicationFrame", mainLocale
-            //Locale.getDefault()
-            //new Locale("en", "US")
     );
 
     public MainApplicationFrame() {
-
         UploadDialog dialog = new UploadDialog(this);
         dialog.setVisible(true);
 
@@ -115,45 +115,68 @@ public class MainApplicationFrame extends JFrame
                 "displayMode"),
                 KeyEvent.VK_V, rb.getString("appDisplayModeControl")
         );
-        lookAndFeelMenu.add(makeMenuItem(rb.getString("systemScheme"),
+        JMenuItem systemScheme = makeMenuItem(rb.getString("systemScheme"),
                 (event) -> {
                     setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                     this.invalidate();
-                }));
-        lookAndFeelMenu.add(makeMenuItem(rb.getString("universalScheme"),
+                });
+        lookAndFeelMenu.add(systemScheme);
+        JMenuItem universalScheme = makeMenuItem(rb.getString("universalScheme"),
                 (event) -> {
                     setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
                     this.invalidate();
-                }));
+                });
+        lookAndFeelMenu.add(universalScheme);
+
+        allMenuItem.put("systemScheme", systemScheme);
+        allMenuItem.put("universalScheme", universalScheme);
 
         JMenu testMenu = makeMenu(rb.getString("tests"), KeyEvent.VK_T, rb.getString("testCommands"));
-
+        JMenuItem logMessages = makeMenuItem(rb.getString("logMessages"),
+                (event) -> Logger.debug(rb.getString("newLine")));
         // поменять локаль?
-        testMenu.add(makeMenuItem(rb.getString("logMessages"),
-                (event) -> Logger.debug(rb.getString("newLine"))));
+        testMenu.add(logMessages);
 
         JMenu exitMenu = makeMenu(rb.getString("exit"), KeyEvent.VK_V, rb.getString("exitGame"));
-        exitMenu.add(makeMenuItem(rb.getString("exit"),
+
+        JMenuItem exit = makeMenuItem(rb.getString("exit"),
                 (event) -> {
                     CloseDialog closeDialog = new CloseDialog(this);
                     closeDialog.onPushedCloseButton(event);
                 }
-        ));
+        );
+        exitMenu.add(exit);
+
+        allMenuItem.put("logMessages", logMessages);
+        allMenuItem.put("exit", exit);
 
         JMenu localeMenu = makeMenu(rb.getString(
                 "locale"),
                 KeyEvent.VK_V, rb.getString("switchLocale")
         );
-        localeMenu.add(makeMenuItem(rb.getString("ru_locale"),
+
+        JMenuItem ru_locale = makeMenuItem(rb.getString("ru_locale"),
                 (event) -> {
-                    switchLocale("ru");
+                    switchLocale(Locale.getDefault());
                     this.invalidate();
-                }));
-        localeMenu.add(makeMenuItem(rb.getString("en_locate"),
+                });
+
+        localeMenu.add(ru_locale);
+        JMenuItem en_locate = makeMenuItem(rb.getString("en_locate"),
                 (event) -> {
-                    switchLocale("en");
+                    switchLocale( new Locale("en", "US"));
                     this.invalidate();
-                }));
+                });
+
+        localeMenu.add(en_locate);
+        allMenuItem.put("en_locate", en_locate);
+        allMenuItem.put("ru_locale", ru_locale);
+
+
+        allMenu.put("displayMode", lookAndFeelMenu);
+        allMenu.put("tests", testMenu);
+        allMenu.put("exit", exitMenu);
+        allMenu.put("locale", localeMenu);
 
         menuBar.add(localeMenu);
         menuBar.add(lookAndFeelMenu);
@@ -162,18 +185,30 @@ public class MainApplicationFrame extends JFrame
         return menuBar;
     }
 
-    private void switchLocale(String loc){
-        if (loc.equals("en"))
-            mainLocale = new Locale("en", "US");
-        else mainLocale = Locale.getDefault();
+    private void switchLocale(Locale loc){
+        mainLocale = loc;
+        rb = ResourceBundle.getBundle(
+                "mainApplicationFrame", mainLocale
+        );
+        setLocale(loc);
         updateLocale(mainLocale);
     }
 
     private void updateLocale(Locale loc){
-        //logWindow.setTitle("test");
+        for (String menuName: allMenu.keySet()) {
+            JMenu menu = allMenu.get(menuName);
+            menu.setText(rb.getString(menuName));
+        }
+        for (String menuItemName: allMenuItem.keySet()) {
+            JMenuItem menu = allMenuItem.get(menuItemName);
+            menu.setText(rb.getString(menuItemName));
+        }
+
         logWindow.setLocale(loc);
         scoreWindow.setLocale(loc);
-
+        for(int i = 0; i < windowThreads.length; i++){
+            windowThreads[i].getGameWindow().setLocale(loc);
+        }
     }
 
     private JMenuItem makeMenuItem(String text, ActionListener listener) {

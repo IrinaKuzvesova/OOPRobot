@@ -16,6 +16,7 @@ public class FrameDialog extends InternalFrameAdapter {
     @Override
     public void internalFrameClosing(InternalFrameEvent internalFrameEvent) {
         Dialog dialog = new Dialog(owner);
+        dialog.setLocale(owner.getLocale());
         dialog.setVisible(true);
         JInternalFrame frame = internalFrameEvent.getInternalFrame();
         if (dialog.is_closed()) {

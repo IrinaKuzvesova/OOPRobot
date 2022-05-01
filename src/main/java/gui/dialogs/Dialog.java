@@ -8,15 +8,18 @@ import java.util.ResourceBundle;
 public class Dialog extends JDialog {
     private boolean closed = false;
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle(
+    private static ResourceBundle rb = ResourceBundle.getBundle(
             "dialog",
-            //Locale.getDefault()
-            new Locale("en", "US")
+            Locale.getDefault()
     );
 
     public Dialog(JFrame owner) {
         super(owner, rb.getString("title"), true);
-        JLabel label = new JLabel(rb.getString("confText"));label.setLocation(200, 200);
+        setLocale(owner.getLocale());
+        rb = ResourceBundle.getBundle("dialog", owner.getLocale());
+        this.setTitle(rb.getString("title"));
+        JLabel label = new JLabel(rb.getString("confText"));
+        label.setLocation(200, 200);
         add(label);
 
         JButton yes = new JButton(rb.getString("yesButton"));
@@ -39,5 +42,10 @@ public class Dialog extends JDialog {
 
     public boolean is_closed() {
         return closed;
+    }
+
+    public void setLocale(Locale locale){
+        rb = ResourceBundle.getBundle("dialog", locale);
+        this.setTitle(rb.getString("title"));
     }
 }

@@ -6,9 +6,12 @@ import gui.WindowThread;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class CloseDialog extends WindowAdapter{
     private MainApplicationFrame owner;
+    Dialog dialog;
 
     public CloseDialog(MainApplicationFrame  owner){
         this.owner = owner;
@@ -23,7 +26,8 @@ public class CloseDialog extends WindowAdapter{
     }
 
     private void close() {
-        Dialog dialog = new Dialog(owner);
+        dialog = new Dialog(owner);
+        dialog.setLocale(owner.getLocale());
         dialog.setVisible(true);
         if (dialog.is_closed()) {
             owner.getLogWindow().dispose();
@@ -33,5 +37,8 @@ public class CloseDialog extends WindowAdapter{
             }
             System.exit(0);
         }
+    }
+    public void setLocale(Locale locale){
+        dialog.setLocale(locale);
     }
 }

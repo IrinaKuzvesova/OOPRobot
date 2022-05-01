@@ -21,7 +21,7 @@ public class FoodGenerator {
             public void run() {
                 generateFood();
             }
-        }, 0, 1000);
+        }, 0, 2000);
     }
 
     public void addPointsRequest(Point point) {

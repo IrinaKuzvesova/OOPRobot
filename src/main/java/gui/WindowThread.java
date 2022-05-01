@@ -28,7 +28,12 @@ public class WindowThread extends Thread{
 
     @Override
     public void interrupt() {
-        gameWindow.dispose();
+        try {
+            gameWindow.dispose();
+        }
+        catch (Exception e){
+
+        }
         super.interrupt();
     }
 }

@@ -16,10 +16,9 @@ public class GameWindow extends JInternalFrame
     private final GameVisualizer gameVisualizer;
     private final int id;
 
-    private static final ResourceBundle rb = ResourceBundle.getBundle(
+    private static ResourceBundle rb = ResourceBundle.getBundle(
             "gameWindow",
-            //Locale.getDefault()
-            new Locale("en", "US")
+            Locale.getDefault()
     );
 
     public GameWindow(int id, boolean isLoad) {
@@ -52,4 +51,9 @@ public class GameWindow extends JInternalFrame
         size.save(name);
         super.dispose();
     }
+    public void setLocale(Locale locale){
+        rb = ResourceBundle.getBundle("gameWindow", locale);
+        this.setTitle(rb.getString("title")+id);
+    }
+
 }
