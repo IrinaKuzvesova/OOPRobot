@@ -32,6 +32,7 @@ public class CloseDialog extends WindowAdapter{
         if (dialog.is_closed()) {
             owner.getLogWindow().dispose();
             owner.getScoreWindow().dispose();
+            owner.saveWindows();
             for (WindowThread windowThread: owner.getWindowThreads()) {
                 windowThread.interrupt();
             }

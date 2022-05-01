@@ -21,7 +21,7 @@ public class GameWindow extends JInternalFrame
             Locale.getDefault()
     );
 
-    public GameWindow(int id, boolean isLoad) {
+    public GameWindow(int id) {
         //String.valueOf(id)
         super(rb.getString("title")+id, true, true, true, true);
         this.name = "game" + id;
@@ -31,24 +31,19 @@ public class GameWindow extends JInternalFrame
         panel.add(gameVisualizer, BorderLayout.CENTER);
         getContentPane().add(panel);
         // загружает сохранения
-        if(isLoad){
-            new WindowCreator(this, name).setSizes();
-        }
-        else{
-            this.setLocation(400, 10);
-            this.setSize(400, 400);
-        }
         setResizable(false);
         show();
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public void dispose() {
-        Rectangle bounds = this.getBounds();
         DataTransmitter.killRobot(id);
         gameVisualizer.dispose();
-        Saver size = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, this.isIcon, this.isSelected);
-        size.save(name);
         super.dispose();
     }
     public void setLocale(Locale locale){

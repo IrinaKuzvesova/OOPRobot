@@ -1,10 +1,6 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
@@ -19,6 +15,7 @@ public class GameVisualizer extends JPanel {
     private static final Color[] colors = new Color[]{Color.blue, Color.red, Color.cyan, Color.MAGENTA, Color.GREEN, Color.orange};
     private static Set<Food> food = Collections.newSetFromMap(new ConcurrentHashMap<>());
     public static FoodGenerator foodGenerator = new FoodGenerator(food);
+    private final int id;
 
     private Robot robot;
 
@@ -29,6 +26,7 @@ public class GameVisualizer extends JPanel {
 
     public GameVisualizer(GameWindow gameWindow, int id) {
         gameOwner = gameWindow;
+        this.id = id;
         robot = new Robot(200, 300, colors[id], gameWindow, this, id);
         addMouseListener(new MouseAdapter() {
             @Override
@@ -40,14 +38,18 @@ public class GameVisualizer extends JPanel {
         initializeTimer();
         repaint();
         setDoubleBuffered(true);
+        setOpaque(true);
     }
     private void initializeTimer() {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                onRedrawEvent();
+                synchronized (KeyHolder.paintKey) {
+                    onRedrawEvent();
+                }
             }
-        }, 0, 50);
+            //0, 1
+        }, 0, 1);
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -84,12 +86,18 @@ public class GameVisualizer extends JPanel {
     }
 
     protected void onRedrawEvent() {
-        EventQueue.invokeLater(this::repaint);
+        if (!PaintManager.getAccessToPaint(id))
+        {
+            return;
+        }
+        this.repaint();
     }
 
     protected void onModelUpdateEvent() {
         try {
-            robot.move();
+            synchronized (KeyHolder.robotLocationKey) {
+                robot.move();
+            }
         }
         catch (Exception e) {
             //just ignore
@@ -98,18 +106,19 @@ public class GameVisualizer extends JPanel {
 
     @Override
     public void paint(Graphics g) {
-        synchronized (KeyHolder.paintKey) {
-            super.paint(g);
-            Graphics2D g2d = (Graphics2D) g;
-            try {
-                for (Food food : food) {
-                    drawTarget(g2d, food);
-                }
-            } catch (Exception e) {
-
+        Graphics2D gd = (Graphics2D) g;
+        Image buffer = createImage(getWidth(), getHeight());
+        Graphics2D g2d = (Graphics2D)buffer.getGraphics();
+        try {
+            for (Food food : food) {
+                drawTarget(g2d, food);
             }
-            drawRobot(g2d, robot.getDirection());
+        } catch (Exception ignored) {
+
         }
+        drawRobot(g2d, robot.getDirection());
+        gd.drawImage(buffer, 0, 0, null);
+
     }
 
     private static void fillOval(Graphics g, int centerX, int centerY, int diam1, int diam2) {
@@ -168,6 +177,7 @@ public class GameVisualizer extends JPanel {
 
     public void deleteTarget(Food target) {
         food.remove(target);
+        repaint();
     }
 
     public void dispose() {

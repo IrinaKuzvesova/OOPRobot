@@ -12,14 +12,14 @@ public class WindowThread extends Thread{
     public WindowThread(int id, MainApplicationFrame owner) {
         this.id = id;
         this.owner = owner;
+        gameWindow = new GameWindow(id);
+        gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        gameWindow.addInternalFrameListener(new FrameDialog(owner, gameWindow));
+        owner.addWindow(gameWindow);
     }
 
     @Override
     public void run() {
-        gameWindow = new GameWindow(id, owner.isLoad);
-        gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        gameWindow.addInternalFrameListener(new FrameDialog(owner, gameWindow));
-        owner.addWindow(gameWindow);
     }
 
     public GameWindow getGameWindow() {

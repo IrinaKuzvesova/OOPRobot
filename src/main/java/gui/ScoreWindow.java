@@ -13,8 +13,6 @@ public class ScoreWindow extends JInternalFrame {
             Locale.getDefault()
     );
 
-    //rb.getString("title")
-
     public ScoreWindow() {
         super(rb.getString("score"), true, true, true, true);
         JPanel panel = new JPanel(new BorderLayout());
@@ -25,9 +23,6 @@ public class ScoreWindow extends JInternalFrame {
 
     @Override
     public void dispose() {
-        Rectangle bounds = this.getBounds();
-        Saver saver = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, this.isIcon, this.isSelected);
-        saver.save(name);
         super.dispose();
     }
 

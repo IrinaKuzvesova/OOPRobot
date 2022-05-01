@@ -14,8 +14,7 @@ public class UploadDialog extends JDialog {
 
     private static final ResourceBundle rb = ResourceBundle.getBundle(
             "dialog",
-            //Locale.getDefault()
-            new Locale("en", "US")
+            Locale.getDefault()
     );
 
     public UploadDialog(MainApplicationFrame owner) {

@@ -1,7 +1,6 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import javax.swing.*;
@@ -11,9 +10,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import gui.dialogs.CloseDialog;
-import gui.dialogs.Dialog;
 import gui.dialogs.FrameDialog;
 import gui.dialogs.UploadDialog;
+import gui.serialize.Saver;
 import log.Logger;
 
 public class MainApplicationFrame extends JFrame
@@ -28,6 +27,7 @@ public class MainApplicationFrame extends JFrame
     private Locale mainLocale = Locale.getDefault();
     private HashMap<String, JMenu> allMenu = new HashMap<>();
     private HashMap<String, JMenuItem> allMenuItem = new HashMap<>();
+    private HashMap<String, JInternalFrame>  windows = new HashMap<>();
 
     private ResourceBundle rb = ResourceBundle.getBundle(
             "mainApplicationFrame", mainLocale
@@ -43,29 +43,42 @@ public class MainApplicationFrame extends JFrame
                 screenSize.height - inset*2);
 
         setContentPane(desktopPane);
-        scoreWindow = createScoreWindow();
-        logWindow = createLogWindow();
-        if(isLoad){
-            new WindowCreator(logWindow, logWindow.name).setSizes();
-            new WindowCreator(scoreWindow, scoreWindow.getName()).setSizes();
-        }
-        else{
-            logWindow.setLocation(0, 0);
-            logWindow.setSize(200, 300);
 
-            scoreWindow.setLocation(0, 301);
-            scoreWindow.setSize(200, 300);
-        }
+        scoreWindow = createScoreWindow();
         addWindow(scoreWindow);
+        windows.put(scoreWindow.getName(), scoreWindow);
+
+        logWindow = createLogWindow();
         addWindow(logWindow);
+        windows.put(logWindow.name, logWindow);
 
         for (int i=0; i<gameWindows.length; i++) {
             windowThreads[i] = new WindowThread(i, this);
             windowThreads[i].start();
             gameWindows[i] = windowThreads[i].getGameWindow();
+            windows.put(windowThreads[i].getGameWindow().getName(), windowThreads[i].getGameWindow());
         }
 
+        for(String name : windows.keySet()){
+            if (isLoad){
+                new WindowCreator(windows.get(name), name).setSizes();
+            }
+            else{
+                setDefaultWindowsLocation();
+            }
+        }
         setJMenuBar(generateMenuBar());
+    }
+    private void setDefaultWindowsLocation(){
+        logWindow.setLocation(0, 0);
+        logWindow.setSize(200, 300);
+
+        scoreWindow.setLocation(0, 301);
+        scoreWindow.setSize(200, 300);
+        for (int i=0; i < gameWindows.length; i++) {
+            gameWindows[i].setLocation(400, 10);
+            gameWindows[i].setSize(400, 400);
+        }
     }
 
     public GameWindow getGameWindow(int index) {
@@ -233,6 +246,13 @@ public class MainApplicationFrame extends JFrame
                 | IllegalAccessException | UnsupportedLookAndFeelException e)
         {
             // just ignore
+        }
+    }
+    public void saveWindows(){
+        for(String name : windows.keySet()){
+            Rectangle bounds = windows.get(name).getBounds();
+            Saver saver = new Saver(bounds.x, bounds.y, bounds.width, bounds.height, windows.get(name).isIcon(), windows.get(name).isSelected());
+            saver.save(name);
         }
     }
 }
